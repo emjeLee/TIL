@@ -8,4 +8,10 @@
 - git clone 
   - 저장소에 있는 것을 내 로컬에 복제 한다는 의미
   - `git clone <저장소 주소>`
+
+## git 명령어
+- git remote -v  
+  - 현재 디렉토리 원격저장소 확인
+- git remote add origin <레파지스토리 주소>   
+  - 원격 저장소 지정
   
