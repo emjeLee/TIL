@@ -22,3 +22,4 @@ Today I learned
 ## Typescript
 - [목차](#목차)
 - [Start Typescript](TypeScript/Start%20TypeScript.md)
+- [Type Of Typescript](TypeScript/Type.md)
