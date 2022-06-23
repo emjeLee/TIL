@@ -17,6 +17,7 @@ Today I learned
     - [Stack](자료구조/Stack%20and%20Queue/Stack.js)
     - [Queue](자료구조/Stack%20and%20Queue/Queue.js)
     - [Priority Queue](자료구조/Stack%20and%20Queue/Priority-Queue.js)
+- [Hahs](%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0/Hash/)
 
 ## Typescript
 - [목차](#목차)
