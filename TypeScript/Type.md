@@ -117,4 +117,28 @@ const mj = playerMaker("mj")
 mj.age = 20 // Error
 
 ```
+## readonly
+readonly를 사용 해주면 말 잠금, 즉 속성값 변경이 불가능해진다.  
+아래와 같이 push는 사용할 수 없지만 filter, map같이 원본배열이 바뀌지 않는 메서드들은 사용이 가능
+```typescript
+const numbers: readonly number[] = [1,2,3,4]
+numbers.push(5) // Error
+```
+## Tuple
+- 특정 위치에 특정 타입이 있어야 한다.
+- 최소한의 길이를 가져야 한다.
+- JS에서는 평범한 배열로 보임
+```typescript
+// 최소 3개의 요소를 가지며 그 요소의 타입이 순서대로 string, number, boolean의 속성을 가져야 한다.
+const player: [string, number, boolean] = ["mj", 1, true]
+player[0] = 1 // Error
+```
 
+## any
+- 모든것을 비활성화 시킨다.  
+any를 사용하면 아무 타입이나 가질 수 있게 된다 즉, TS의 보호를 받지 못하게 되는 것 기존 JS와 같아진다고 보면 된다.
+```typescript
+const a : any[] = [1,2]
+const b : any = true
+a+b //오류가 나지 않음!!!
+```
