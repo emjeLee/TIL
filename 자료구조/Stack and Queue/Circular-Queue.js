@@ -27,7 +27,7 @@ CircularQueue.prototype.enqueue = function(element) {
     if(this.isFull()) return false;
 
     this.array[this.tail % this.size] = element;
-    this.tail++;
+    this.tail = (this.tail + 1) % this.size;
     this.length++;
 
     return true;
@@ -45,11 +45,11 @@ CircularQueue.prototype.dequeue = function(){
     return element;
 };
 
-let c = new CircularQueue([1,2,3]);
+let c = new CircularQueue([1,2,3,4]);
 console.log(c.enqueue(5))
 console.log(c.enqueue(6))
 console.log(c.dequeue())
 console.log(c.dequeue())
-console.log(c.enqueue(7))
-console.log(c.enqueue(8))
+
+console.log(c.enqueue(6))
 console.log(c)
