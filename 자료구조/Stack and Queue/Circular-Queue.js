@@ -21,3 +21,35 @@ CircularQueue.prototype.isEmpty = function(){
 CircularQueue.prototype.isFull = function(){
     return this.length == this.size;
 };
+
+// enqueue() : 데이터 추가
+CircularQueue.prototype.enqueue = function(element) {
+    if(this.isFull()) return false;
+
+    this.array[this.tail % this.size] = element;
+    this.tail++;
+    this.length++;
+
+    return true;
+};
+
+// dequeue() : 데이터 삭제
+CircularQueue.prototype.dequeue = function(){
+    if(this.isEmpty()) return undefined;
+
+    let element = this.array[this.head];
+    delete this.array[this.head];
+    this.head = (this.head + 1) % this.size;
+    this.length--;
+
+    return element;
+};
+
+let c = new CircularQueue([1,2,3]);
+console.log(c.enqueue(5))
+console.log(c.enqueue(6))
+console.log(c.dequeue())
+console.log(c.dequeue())
+console.log(c.enqueue(7))
+console.log(c.enqueue(8))
+console.log(c)
