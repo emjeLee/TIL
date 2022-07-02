@@ -1,5 +1,6 @@
 // circularQueue() : 초기 속값 설정을 위한 생성자 함수
-function CircularQueue(array = [], size = 5){
+const DEFAULT_SIZE = 5; 
+function CircularQueue(array = [], size = DEFAULT_SIZE){
     this.array = array;
     this.size = array.length > size ? array.length : size;
     this.length = array.length;
@@ -45,11 +46,21 @@ CircularQueue.prototype.dequeue = function(){
     return element;
 };
 
-let c = new CircularQueue([1,2,3,4]);
-console.log(c.enqueue(5))
-console.log(c.enqueue(6))
-console.log(c.dequeue())
-console.log(c.dequeue())
+// front() : 첫 데이터 반환
+CircularQueue.prototype.front = function(){
+    return this.length == 0 ? undefined : this.array[this.head];
+};
 
-console.log(c.enqueue(6))
-console.log(c)
+// dataSize() : 큐 내 데이터 개수 확인
+CircularQueue.prototype.dataSize = function(){
+    return this.length;
+};
+
+// clear() : 큐 초기화
+CircularQueue.prototype.clear = function(size = DEFAULT_SIZE){
+    this.array = [];
+    this.size = size;
+    this.length = 0;
+    this.head = 0;
+    this.tail = 0;
+};
