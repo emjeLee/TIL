@@ -44,3 +44,29 @@ LinkedList.prototype.append = function(value){
         current.next = node;
     }
 };
+
+// insert() : position 위치에 노드 추가
+LinkedList.prototype.insert  = function(value, position = 0){
+    if(position < 0 || position > this.length) return false;
+
+    let node = new Node(value),
+        current = this.head,
+        index = 0,
+        prev;
+    
+    if(position === 0){
+        node.next = current;
+        this.head = node;
+    } else {
+        while (index++ < position){
+            prev = current;
+            current = current.next;
+        }
+        node.next = current;
+        prev.next = node;
+    }
+
+    this.length++;
+
+    return true;
+};
