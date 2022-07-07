@@ -70,3 +70,27 @@ LinkedList.prototype.insert  = function(value, position = 0){
 
     return true;
 };
+
+// remove() : value 데이터를 찾아 노드 삭제
+LinkedList.prototype.remove = function(value){
+    let current = this.head,
+        prev = current;
+
+    while(current.data != value  && current. next != null){
+        prev = current;
+        current = current.next;
+    }
+    if(current.data != value){
+        return null;
+    }
+
+    if(current === this.head){
+        this.head = current.next;
+    } else {
+        prev.next = current.next;
+    }
+
+    this.length--;
+
+    return current.data;
+};
