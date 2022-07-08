@@ -115,3 +115,24 @@ LinkedList.prototype.removeAt = function(position = 0){
     this.length--;
     return current.data;
 };
+
+// indexOf() : value 값을 갖는 노드위치 반환
+LinkedList.prototype.indexOf = function(value){
+    let current = this.head;
+    index = 0;
+
+    while(current != null){
+        if(current.data === value) return index;
+
+        index++;
+        current = current.next;
+    }
+
+    return -1;
+}; 
+
+// remove2() : indexOf + removeAt = remove
+LinkedList.prototype.remove2 = function(value){
+    let index =  this.indexOf(value);
+    return this.removeAt(index);
+};
