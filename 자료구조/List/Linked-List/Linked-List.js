@@ -136,3 +136,12 @@ LinkedList.prototype.remove2 = function(value){
     let index =  this.indexOf(value);
     return this.removeAt(index);
 };
+
+let linkedList = new LinkedList();
+console.log(linkedList)
+linkedList.head = new Node(1);
+linkedList.length++;
+console.log(linkedList)
+linkedList.head.next = new Node(23);
+linkedList.length++;
+console.log(linkedList)
