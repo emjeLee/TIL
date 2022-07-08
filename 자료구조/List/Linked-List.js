@@ -76,7 +76,7 @@ LinkedList.prototype.remove = function(value){
     let current = this.head,
         prev = current;
 
-    while(current.data != value  && current. next != null){
+    while(current.data != value  && current.next != null){
         prev = current;
         current = current.next;
     }
@@ -92,5 +92,26 @@ LinkedList.prototype.remove = function(value){
 
     this.length--;
 
+    return current.data;
+};
+
+// removeAt() : position 위치 노드 삭제
+LinkedList.prototype.removeAt = function(position = 0){
+    if(position < 0 || position >= this.length) return null;
+
+    let current = this.head,
+        index = 0,
+        prev;
+
+    if(position === 0){
+        return this.head;
+    } else {
+        while(index++ < position){
+            prev = current;
+            current = current.next;
+        }
+        prev.next = current.next;
+    }
+    this.length--;
     return current.data;
 };
