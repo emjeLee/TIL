@@ -18,6 +18,8 @@ Today I learned
     - [Queue](자료구조/Stack%20and%20Queue/Queue.js)
     - [Priority Queue](자료구조/Stack%20and%20Queue/Priority-Queue.js)
 - [Hash Table](%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0/Hash/)
+- [List](/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0/List/)
+    -  [Linked-List](/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0/List/Linked-List/)
 
 ## Typescript
 - [목차](#목차)
