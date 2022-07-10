@@ -4,9 +4,9 @@
 - 하지만 특정요소를 찾을때에는 순회를 해야 한다.
 # 구현 메서드
 - 노드 개수/ 값의 존재 여부/ 노드 출력 
-    - LinkedList.size(), LinkedList.isEmpty(), LinkedList.printNode()
+    - [LinkedList.size()](#size), [LinkedList.isEmpty()](#isempty), [LinkedList.printNode()](#printnode)
 - 노드 추가 
-    - LinkedList.append(), LinkedList.insert()
+    - [LinkedList.append()](#append), [LinkedList.insert()](#insert)
 - 노드 삭제 
     - LinkedList.remove(), LinkedList.removeAt()
 - 데이터 위치 확인 
@@ -77,7 +77,7 @@ console.log(linkedList)
 //  head: Node { data: 1, next: Node { data: 23, next: null } }, length: 2}
 ```
 
-## printNode
+## printNode()
 값을 탐색 하여 노드 출력
 - 첫 번째 값으로 head값을 셋팅.
 - node가 null이 아닐 때 까지 반복문을 돈다.
@@ -91,7 +91,7 @@ LinkedList.prototype.printNode = function(){
     console.log("null");
 };
 ``` 
-## append
+## append()
 연결리스트 가장 끝에 노드 추가
 - head가 null인 상황은 값이 없는 상태니까 바로 node값을 넣어준다.
 - current.next값이 null 일 때의 current값이 마지막 요소 이기 때문에 current에 current.next의 값을 업데이트 해주면서 마지막 데이터를 찾는다
@@ -133,4 +133,43 @@ linkedList.append(1); // head -> 1 , current => head 상태가 된다.
 // head -> 1 -> null
 // 12 -> null
 linkedList.append(12);
+```
+## insert()
+원하는 위치(position)에 노드 추가
+- value와 position을 받는다 position의 기본값은 0.
+- 내가 어디에 위치해있는지, 얼마만큼 이동했는지 알 수있는 index와 이전 노드 값을 저장할 prev를 선언.
+- position 이 **0** 일 때
+    - 첫 번째 값으로 들어가기 때문에 node.next 에 current(head)값을 넣어주고, this.head에 노드를 추가 시킨다.
+- position이 **1 이상** 일 때 
+    - index가 position의 값보다 크거나같을때 까지 반복.
+        - prev값에 현재 위치 해 있는 current값을 넣어준다.
+        - current은 다음값을 가리킨다.
+    - index가 position값보다 크거나 같아지면 prev와 current 사이에 값을 넣어준다.
+
+```javascript
+LinkedList.prototype.insert  = function(value, position = 0){
+    // position의 값이 0보다 작거나 list의 길이 보다 클 시 false를 반환. 
+    if(position < 0 || position > this.length) return false;
+
+    let node = new Node(value),
+        current = this.head,
+        index = 0,
+        prev;
+    
+    if(position === 0){
+        node.next = current;
+        this.head = node;
+    } else {
+        while (index++ < position){
+            prev = current;
+            current = current.next;
+        }
+        node.next = current;
+        prev.next = node;
+    }
+
+    this.length++;
+
+    return true;
+};
 ```
