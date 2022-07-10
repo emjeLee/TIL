@@ -112,3 +112,25 @@ LinkedList.prototype.append = function(value){
     this.length++;
 };
 ```
+## TEST
+```javascript
+let linkedList = new LinkedList();
+
+linkedList.append(1);
+linkedList.append(12);
+linkedList.append(123);
+
+linkedList.printNode();
+```
+- 현재의 head의 값이 null이기 때문에 if문에 의해 head에 바로 node를 연결.
+```javascript
+linkedList.append(1); // head -> 1 , current => head 상태가 된다.
+```
+- head에 값이 있으니 while문을 돌며 current값을 current.next로 업데이트 해주어 next의 값이 null인 요소가 나올 때 까지 반복
+-  마지막 요소를 만나면 next값으로 추가된 node의 값을 연결 해 준다.
+- 반복
+```javascript
+// head -> 1 -> null
+// 12 -> null
+linkedList.append(12);
+```
