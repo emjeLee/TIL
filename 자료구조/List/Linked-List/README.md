@@ -173,3 +173,23 @@ LinkedList.prototype.insert  = function(value, position = 0){
     return true;
 };
 ```
+## TEST
+```javascript
+let linkedList = new LinkedList();
+
+linkedList.insert(1);
+linkedList.insert(12);
+linkedList.insert(123);
+// 123 -> 12 -> 1 -> null
+```
+현재 : current = 1 (head가 가르키고있는 노드)  
+
+- index = 0 / position = 1 이므로 반복문 실행과 동시에 index++ 되어 1이 된다.
+-  prev에 현재 current값을 업데이트 해준다.
+-  current 는 current.next 다음 값을 업데이트 해준다.
+현재 : prev = 123, current = 12
+- 반복문을 빠져나오면 들어갈 위치가 정해 졌다는 뜻 이므로 node.next에 current를 넣어주고 prev.next에 node값을 넣어준다.
+```javascript
+linkedList.insert(11,1);
+// 123 -> 11 -> 12 -> 1 -> null
+```
