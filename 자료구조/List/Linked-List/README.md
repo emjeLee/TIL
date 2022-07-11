@@ -193,3 +193,37 @@ linkedList.insert(123);
 linkedList.insert(11,1);
 // 123 -> 11 -> 12 -> 1 -> null
 ```
+
+## remove()
+특정 노드 삭제
+- prev, current 모두 같은 위치에서 부터 시작한다
+- while문을 돌면서 value의 값을 만날때까지 혹은 다음값이 null 일때까지 prev에 current를 current에는 current.next값을 넣어준다
+ - value값을 찾지 못 했을 때 (current값이 value값과 다르면) 
+    - null반환 
+- value값을 찾았을 때
+    - current(현재value값) 와 head를 비교하여 같다면 바로 current.next로 연결
+    - head값과 같지 않다면 전 값(prev)값과 현재값(current)의 다음값(current.next)과 연결 시켜 준다.
+```javascript
+LinkedList.prototype.remove = function(value){
+    let current = this.head,
+        prev = current;
+
+    while(current.data != value  && current.next != null){
+        prev = current;
+        current = current.next;
+    }
+    if(current.data != value){
+        return null;
+    }
+
+    if(current === this.head){
+        this.head = current.next;
+    } else {
+        prev.next = current.next;
+    }
+
+    this.length--;
+
+    return current.data;
+};
+```
