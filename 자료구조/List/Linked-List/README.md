@@ -135,13 +135,13 @@ linkedList.append(1); // head -> 1 , current => head 상태가 된다.
 linkedList.append(12);
 ```
 ## insert()
-원하는 위치(position)에 노드 추가
+원하는 위치(position)의 노드 추가
 - value와 position을 받는다 position의 기본값은 0.
 - 내가 어디에 위치해있는지, 얼마만큼 이동했는지 알 수있는 index와 이전 노드 값을 저장할 prev를 선언.
-- position 이 **0** 일 때
+- position 이 **0** 일 경우
     - 첫 번째 값으로 들어가기 때문에 node.next 에 current(head)값을 넣어주고, this.head에 노드를 추가 시킨다.
-- position이 **1 이상** 일 때 
-    - index가 position의 값보다 크거나같을때 까지 반복.
+- position이 **1 이상** 일 경우
+    - index가 position의 값보다 클 때 까지 반복.
         - prev값에 현재 위치 해 있는 current값을 넣어준다.
         - current은 다음값을 가리킨다.
     - index가 position값보다 크거나 같아지면 prev와 current 사이에 값을 넣어준다.
@@ -249,4 +249,38 @@ linkedList.remove(100);
     - prev.next(123) = current.next(12 의 다음 값 1)과 연결 시킨다.
 ```javascript
 linkedList.remove(123);
+```
+
+## removeAt()
+특정 위치(position)의 노드 삭제
+- position을 받는다 position의 기본값은 0.
+- 현재값을 저장할 current, 반복 횟수 확인을 위한 index, 이전값을 저장할 prev 변수 선언
+- position 이 **0** 일 경우
+    - head에 바로 current.next값을 연결 시켜 준다.
+- position 이 **1 이상** 일 경우
+    - index가 position의 값보다 클 때 까지 반복.
+        - prev값에 현재 위치 해 있는 current값을 넣어준다.
+        - current는 현재 위치의 다음값을 가리킨다.
+    - 반복문을 빠져나오면 현재값의 이전값과 현재값의 다음값을 연결 시켜준다.
+
+```javascript
+LinkedList.prototype.removeAt = function(position = 0){
+    if(position < 0 || position >= this.length) return null;
+
+    let current = this.head,
+        index = 0,
+        prev;
+
+    if(position === 0){
+        this.head = current.next;
+    } else {
+        while(index++ < position){
+            prev = current;
+            current = current.next;
+        }
+        prev.next = current.next;
+    }
+    this.length--;
+    return current.data;
+};
 ```
