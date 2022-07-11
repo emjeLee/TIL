@@ -8,7 +8,7 @@
 - 노드 추가 
     - [LinkedList.append()](#append), [LinkedList.insert()](#insert)
 - 노드 삭제 
-    - [LinkedList.remove()](#remove), LinkedList.removeAt()
+    - [LinkedList.remove()](#remove), [LinkedList.removeAt()](#removeat)
 - 데이터 위치 확인 
     - LinkedList.indexOf()
 
@@ -283,4 +283,24 @@ LinkedList.prototype.removeAt = function(position = 0){
     this.length--;
     return current.data;
 };
+```
+## TEST
+```javascript
+let linkedList = new LinkedList();
+
+linkedList.insert(1);
+linkedList.insert(12);
+linkedList.insert(123);
+// 123 -> 12 -> 1 -> null
+
+linkedList.remove(1);
+// 123 -> 1 -> null
+```
+현재 | current = 123, index = 0, position = 1
+- position이 0이 아니니 else 실행.
+- while문이 실행되면서 index는 1이 되고 prev =  123(current), current = 12(current.next)가 된다. (index = 1, position = 1 이기 때문에 반복문을 빠져나옴.)
+- prev의 다음값으로 현재 current의 다음값인 **1**을 연결 시켜준다.
+
+```javascript
+linkedList.remove(1);
 ```
