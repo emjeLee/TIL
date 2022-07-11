@@ -49,7 +49,7 @@ LinkedList.prototype.isEmpty = function(){
     return this.length === 0;
 };
 ```
----
+
 ## TEST
 - 객체 생성
 ```javascript
@@ -76,7 +76,7 @@ console.log(linkedList)
 // LinkedList {
 //  head: Node { data: 1, next: Node { data: 23, next: null } }, length: 2}
 ```
-
+---
 ## printNode()
 값을 탐색 하여 노드 출력
 - 첫 번째 값으로 head값을 셋팅.
@@ -134,6 +134,7 @@ linkedList.append(1); // head -> 1 , current => head 상태가 된다.
 // 12 -> null
 linkedList.append(12);
 ```
+---
 ## insert()
 원하는 위치(position)의 노드 추가
 - value와 position을 받는다 position의 기본값은 0.
@@ -193,7 +194,7 @@ linkedList.insert(123);
 linkedList.insert(11,1);
 // 123 -> 11 -> 12 -> 1 -> null
 ```
-
+---
 ## remove()
 특정 노드 삭제
 - prev, current 모두 같은 위치에서 부터 시작한다
@@ -250,7 +251,7 @@ linkedList.remove(100);
 ```javascript
 linkedList.remove(123);
 ```
-
+---
 ## removeAt()
 특정 위치(position)의 노드 삭제
 - position을 받는다 position의 기본값은 0.
@@ -303,7 +304,7 @@ linkedList.remove(1);
 ```javascript
 linkedList.remove(1);
 ```
-
+---
 ## indexOf()
 특정 값의 노드 위치 반환.
 - 위치를 저장해 줄 index 선언.
@@ -325,4 +326,23 @@ LinkedList.prototype.indexOf = function(value){
 
     return -1;
 }; 
+```
+## TEST
+```javascript
+let linkedList = new LinkedList();
+
+linkedList.insert(1);
+linkedList.insert(12);
+linkedList.insert(123);
+// 123 -> 12 -> 1 -> null
+
+linkedList.indexOf(1); // 12
+```
+현재 | current = 123, index = 0, value = 1
+- current가 null값이 아니므로 while문 실행
+- current(123)의 값이 value(1)값과 같지 않으므로
+     - index가 증가되어 index = 1, current = 12 (current는 123의 다음값인 12가된다.)
+     - current.data = 12 , value = 12 값이 같으므로 index값 1을 반환한다.
+```javascript
+linkedList.indexOf(1);
 ```
