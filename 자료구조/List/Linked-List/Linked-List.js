@@ -104,7 +104,7 @@ LinkedList.prototype.removeAt = function(position = 0){
         prev;
 
     if(position === 0){
-        return this.head;
+        this.head = current.next;
     } else {
         while(index++ < position){
             prev = current;
@@ -115,6 +115,7 @@ LinkedList.prototype.removeAt = function(position = 0){
     this.length--;
     return current.data;
 };
+let linkedList = new LinkedList();
 
 // indexOf() : value 값을 갖는 노드위치 반환
 LinkedList.prototype.indexOf = function(value){
@@ -136,12 +137,3 @@ LinkedList.prototype.remove2 = function(value){
     let index =  this.indexOf(value);
     return this.removeAt(index);
 };
-
-let linkedList = new LinkedList();
-console.log(linkedList)
-linkedList.head = new Node(1);
-linkedList.length++;
-console.log(linkedList)
-linkedList.head.next = new Node(23);
-linkedList.length++;
-console.log(linkedList)
