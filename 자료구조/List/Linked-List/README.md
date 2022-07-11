@@ -10,7 +10,7 @@
 - 노드 삭제 
     - [LinkedList.remove()](#remove), [LinkedList.removeAt()](#removeat)
 - 데이터 위치 확인 
-    - LinkedList.indexOf()
+    - [LinkedList.indexOf()](#indexof)
 
 ---
 
@@ -300,7 +300,29 @@ linkedList.remove(1);
 - position이 0이 아니니 else 실행.
 - while문이 실행되면서 index는 1이 되고 prev =  123(current), current = 12(current.next)가 된다. (index = 1, position = 1 이기 때문에 반복문을 빠져나옴.)
 - prev의 다음값으로 현재 current의 다음값인 **1**을 연결 시켜준다.
-
 ```javascript
 linkedList.remove(1);
+```
+
+## indexOf()
+특정 값의 노드 위치 반환.
+- 위치를 저장해 줄 index 선언.
+- 현재값(current)이 null 이 아닐 때까지 List를 탐색한다.
+    - index값을 증가시킨다.
+    - 현재값(current)을 다음값(current.next)으로 업데이트 시켜준다.
+        - 만약 값을 찾았다면 index의 값을 반환, 찾지 못했다면 -1 을 반환한다.
+```javascript
+LinkedList.prototype.indexOf = function(value){
+    let current = this.head;
+    index = 0;
+
+    while(current != null){
+        if(current.data === value) return index;
+
+        index++;
+        current = current.next;
+    }
+
+    return -1;
+}; 
 ```
