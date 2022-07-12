@@ -4,7 +4,7 @@
 - 하지만 이전노드를 저장할 변수를 하나 더 생성해야 하기 때문에 메모리를 더 많이 사용한다.
 # 구현 메서드
 - 노드 개수 / 값의 존재 여부
-    - DoubleLinkedList.size(), DoubleLinkedList.isEmpty()
+    - [DoubleLinkedList.size()](#size), [DoubleLinkedList.isEmpty()](#isempty)
 - 순 차출력 / 역 출력
     - DoubleLinkedList.printNode(), DoubleLinkedList.printNodelnverse()
 - 노드 추가
@@ -45,4 +45,39 @@ DoubleLinkedList.prototype.size = function(){
 DoubleLinkedList.prototype.isEmpty = function(){
     return this.length === 0;
 };
+```
+## TEST
+```javascript
+let doubleLinkedList = DoubleLinkedList();
+let node;
+console.log(doubleLinkedList);
+ // DoubleLinkedList { head: null, tail: null, length: 0 }
+
+node = new Node(123);
+doubleLinkedList.head = node;
+doubleLinkedList.tail = node;
+doubleLinkedList.length++;
+console.log(doubleLinkedList);
+ /* DoubleLinkedList {
+    head: Node { data: 123, next: null, prev: null },
+    tail: Node { data: 123, next: null, prev: null },
+    length: 1 } */
+
+node = new Node(456);
+doubleLinkedList.tail.next = node;
+node.prev = doubleLinkedList.tail;
+doubleLinkedList.tail = node;
+doubleLinkedList.length++;
+console.log(doubleLinkedList);
+/* DoubleLinkedList {
+    head: <ref *1> Node {
+        data: 123,
+        next: Node { data: 456, next: null, prev: [Circular *1] },
+        prev: null },
+    tail: <ref *2> Node {
+        data: 456,
+        next: null,
+        prev: <ref *1> Node { data: 123, next: [Circular *2], prev: null }},
+    length: 2
+    } */
 ```
