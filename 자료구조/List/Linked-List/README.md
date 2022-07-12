@@ -24,7 +24,7 @@ function Node(data){
 };
 ```
 
-## LinkedList 객체 생성
+## LinkedList 생성자 함수 생성
 - head와 length를 갖는 객체 생성.
 - 처음에 head는 연결된 값이 없으니 null로 설정 해 준다.
 - 값이 없으니 length또한 0으로 시작. 
