@@ -6,7 +6,7 @@
 - 노드 개수 / 값의 존재 여부
     - [DoubleLinkedList.size()](#size), [DoubleLinkedList.isEmpty()](#isempty)
 - 순 차출력 / 역 출력
-    - DoubleLinkedList.printNode(), DoubleLinkedList.printNodelnverse()
+    - DoubleLinkedList.printNode(), DoubleLinkedList.printNodeInverse()
 - 노드 추가
     - DoubleLinkedList.append(), DoubleLinkedList.insert()
 - 노드 삭제
@@ -80,4 +80,32 @@ console.log(doubleLinkedList);
         prev: <ref *1> Node { data: 123, next: [Circular *2], prev: null }},
     length: 2
     } */
+```
+## printNode
+노드 정방향 출력
+```javascript
+DoubleLinkedList.prototype.printNode = function(){
+    process.stdout.write("head -> ");
+    for(let node = this.head; node != null; node = node.next){
+        process.stdout.write(`${node.data} - > `);
+    }
+    console.log("null");
+};
+```
+## printNodeInverse
+노드 역방향 출력
+- 임의 배열에 값을 하나씩 넣어주고 끝에서부터 하나씩 출력한다.
+```javascript
+DoubleLinkedList.prototype.printNodeInverse = function(){
+    let temp = [];
+
+    process.stdout.write("null <- ");
+    for(let node = this.tail; node != null; node = node.prev){
+        temp.push(node.data);
+    }
+    for(let i = temp.length - 1; i >= 0; i--){
+        process.stdout.write(`${temp[i]} <- `);
+    }
+    console.log("tail");
+};
 ```
