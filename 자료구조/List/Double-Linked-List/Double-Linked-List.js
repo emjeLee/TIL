@@ -136,6 +136,21 @@ DoubleLinkedList.prototype.removeAt = function(position = 0){
         index = 0,
         prev;
     if(position === 0){
-        
+
     }
-}
+};
+
+// indexOf() : 특정값의 노드위치를 반환
+DoubleLinkedList.prototype.indexOf = function(value){
+    let current = this.head,
+    index = 0;
+
+    while(current != null){
+        if(current.data === value) return index;
+
+        index++;
+        current = current.next;
+    }
+
+    return -1;
+};
