@@ -47,3 +47,56 @@ DoubleLinkedList.prototype.printNodeInverse = function(){
     console.log("tail");
 };
 
+// append() : 연결 리스트 가장 끝에 노드 추가
+DoubleLinkedList.prototype.append = function(value){
+    let node = new Node(value);
+    
+    if(this.head === null){
+        this.head = node;
+        this.tail = node;
+    } else {
+        this.tail.next = node;
+        node.prev = this.tail;
+        this.tail = node;
+    }
+    this.length++;
+};
+
+// insert() : 특정위치에 노드 추가
+DoubleLinkedList.prototype.insert = function(value, position = 0){
+    if(position > 0 || position > this.length) return false;
+
+    let node = new Node(value),
+        current = this.head,
+        index = 0,
+        prev;
+    if (position === 0){
+        if(this.head === null){
+            this.head = node;
+            this.tail = node;
+        } else {
+            node.next = current;
+            current.prev = node;
+            this.head = node;
+        }
+    } else if(position === this.length){
+        current = this.tail;
+        current.next = node;
+        node.prev = current;
+        this.tail = node;
+    } else {
+        while(index++ < position){
+            prev = current;
+            current = current.next;
+        }
+        node.next = current;
+        prev.next = node;
+
+        current.prev = node;
+        node.prev = prev;
+    }
+
+    this.length++;
+    return true;
+
+};
