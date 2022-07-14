@@ -136,8 +136,25 @@ DoubleLinkedList.prototype.removeAt = function(position = 0){
         index = 0,
         prev;
     if(position === 0){
+        this.head = current.next;
+        if(this.length === 1) this.tail = null;
+        else this.head.prev = null;
+    } else if(position === this.length - 1){
+        current = this.tail;
+        this.tail = current.prev;
+        this.tail.next = null;
+    } else {
+        while(index++ < position){
+            prev = current;
+            current = current.next;
+        }
 
+        prev.next = current.next;
+        current.next.prev = prev;
     }
+
+    this.length--;
+    return current.data;
 };
 
 // indexOf() : 특정값의 노드위치를 반환
