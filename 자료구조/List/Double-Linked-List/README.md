@@ -6,9 +6,9 @@
 - 노드 개수 / 값의 존재 여부
     - [DoubleLinkedList.size()](#size), [DoubleLinkedList.isEmpty()](#isempty)
 - 순 차출력 / 역 출력
-    - DoubleLinkedList.printNode(), DoubleLinkedList.printNodeInverse()
+    - [DoubleLinkedList.printNode()](#printnode), [DoubleLinkedList.printNodeInverse()](#printnodeinverse)
 - 노드 추가
-    - DoubleLinkedList.append(), DoubleLinkedList.insert()
+    - [DoubleLinkedList.append()](#append), [DoubleLinkedList.insert()](#insert)
 - 노드 삭제
     -  DoubleLinkedList.remove(), DoubleLinkedList.removeAt()
 - 데이터 위치 확인
@@ -81,6 +81,7 @@ console.log(doubleLinkedList);
     length: 2
     } */
 ```
+---
 ## printNode
 노드 정방향 출력
 ```javascript
@@ -107,5 +108,72 @@ DoubleLinkedList.prototype.printNodeInverse = function(){
         process.stdout.write(`${temp[i]} <- `);
     }
     console.log("tail");
+};
+```
+---
+## append
+가장 끝에 노드추가
+- 전반적으로 연결리스트와 비슷하다 다만, 이중연결리스트이기 때문에 tail이 추가됨.
+- 연결리스트에서 순회를 하여 마지막 값을 찾았다면 이중연결리스트에서는 O(1)으로 마지막 값을 찾을수 있어 바로 연결이 가능하다.
+```javascript
+DoubleLinkedList.prototype.append = function(value){
+    let node = new Node(value);
+    
+    if(this.head === null){
+        this.head = node;
+        this.tail = node;
+    } else {
+        this.tail.next = node;
+        node.prev = this.tail;
+        this.tail = node;
+    }
+    this.length++;
+};
+```
+## insert
+특정위치에 노드 추가
+- 연결리스트와 다르게 맨 끝쪽에 들어왔을때에 대한 업데이트가 추가 됨.
+    - 제일 끝 노드를 찾아 current로 업데이트
+    - current.next값으로 node를 업데이트
+    - 서로 앞뒤로 연결 해 준다.
+
+```javascript
+DoubleLinkedList.prototype.insert = function(value, position = 0){
+    if(position > 0 || position > this.length) return false;
+
+    let node = new Node(value),
+        current = this.head,
+        index = 0,
+        prev;
+    if (position === 0){
+        //head가 null이면 tail도 null값
+        if(this.head === null){ 
+            this.head = node;
+            this.tail = node;
+        } else {
+            node.next = current;
+            current.prev = node;
+            this.head = node;
+        }
+    } else if(position === this.length){
+        current = this.tail;
+        current.next = node;
+        node.prev = current;
+        this.tail = node;
+    } else {
+        while(index++ < position){
+            prev = current;
+            current = current.next;
+        }
+        node.next = current;
+        prev.next = node;
+
+        current.prev = node;
+        node.prev = prev;
+    }
+
+    this.length++;
+    return true;
+
 };
 ```
