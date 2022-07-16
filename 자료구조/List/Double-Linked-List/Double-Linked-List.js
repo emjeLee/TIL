@@ -64,7 +64,7 @@ DoubleLinkedList.prototype.append = function(value){
 
 // insert() : 특정위치에 노드 추가
 DoubleLinkedList.prototype.insert = function(value, position = 0){
-    if(position > 0 || position > this.length) return false;
+    if(position < 0 || position > this.length) return false;
 
     let node = new Node(value),
         current = this.head,
@@ -130,7 +130,7 @@ DoubleLinkedList.prototype.remove = function(value){
 
 // removeAt() : 특정 위치의 노드 삭제
 DoubleLinkedList.prototype.removeAt = function(position = 0){
-    if(position > 0 || position > this.length) return null;
+    if(position < 0 || position >= this.length) return null;
 
     let current = this.head,
         index = 0,
