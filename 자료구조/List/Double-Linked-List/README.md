@@ -248,3 +248,29 @@ DoubleLinkedList.prototype.removeAt = function(position = 0){
     return current.data;
 };
 ```
+## TEST
+```javascript
+let doubleLinkedList = DoubleLinkedList();
+
+doubleLinkedList.insert(1);
+doubleLinkedList.insert(12);
+doubleLinkedList.insert(123);
+doubleLinkedList.printNode();
+ // head -> 123 -> 12 -> 1 -> null
+doubleLinkedList.printNodeInverse(); 
+// null <- 123 <- 12 <- 1 <- tail
+
+doubleLinkedList.removeAt(2);
+doubleLinkedList.printNode();
+// head -> 123 -> 12 -> null
+```
+현재 : current = 123, tail = 1, length = 3, position = 2
+- position이 length - 1 인 2 이기 때문에 ```else if```문 실행
+    - current = this.tail (1)
+    - tail = current.prev(12)
+    - tail.next = null
+- 결국 제일 끝노드의 전 값과 끝노드의 다음값인 null값이 서로 연결됨으로써 끝노드(1)이 삭제된다.
+```javascript
+doubleLinkedList.removeAt(1);
+```
+---
