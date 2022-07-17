@@ -139,7 +139,7 @@ DoubleLinkedList.prototype.append = function(value){
 
 ```javascript
 DoubleLinkedList.prototype.insert = function(value, position = 0){
-    if(position > 0 || position > this.length) return false;
+    if(position < 0 || position > this.length) return false;
 
     let node = new Node(value),
         current = this.head,
@@ -175,5 +175,76 @@ DoubleLinkedList.prototype.insert = function(value, position = 0){
     this.length++;
     return true;
 
+};
+```
+---
+## remove
+특정값의 노드 삭제
+- position이 0일 때 노드가 1개만 존재 할 경우
+    - 더 이상 존재하는 노드가 없으니 tail을 null값으로 만들어준다.
+- 마지막 노드가 삭제 될 경우
+    - tail값을 현재값(삭제 될 값)의 전에 연결되어 있는 값으로 업데이트.
+    - 업데이트 된 tail값은 마지막 요소가 됐으니 다음값으로 null을 가르키게 업데이트.
+```javascript
+DoubleLinkedList.prototype.remove = function(value){
+    let current = this.head,
+        prev = current;
+    while(current.data != value && current.next != null){
+        prev = current;
+        current = current.next;
+    }
+
+    if(current.data != value) return null;
+
+    if(current === this.head){
+        this.head = current.next;
+        if(this.length === 1) this.tail = null;
+        else this.head.prev = null;
+    } else if(current === this.tail){
+        this.tail = current.prev;
+        this.tail.next = null;
+    } else {
+        prev.next = current.next;
+        current.next.prev = prev;
+    }
+
+    this.length--;
+    return current.data;
+};
+```
+## removeAt
+특정 위치의 노드 삭제
+- position이 0일 때 노드가 1개만 존재 할 경우
+    - remove와 똑같이 작동.
+- 마지막 노드가 삭제 될 경우
+    - current값을 tail값으로 업데이트 한다.
+    - 삭제를 위해 tail값에는 current.prev값을 업데이트, tail.next에는 null값을 업데이트한다.
+```javascript
+DoubleLinkedList.prototype.removeAt = function(position = 0){
+    if(position < 0 || position > this.length) return null;
+
+    let current = this.head,
+        index = 0,
+        prev;
+    if(position === 0){
+        this.head = current.next;
+        if(this.length === 1) this.tail = null;
+        else this.head.prev = null;
+    } else if(position === this.length - 1){
+        current = this.tail;
+        this.tail = current.prev;
+        this.tail.next = null;
+    } else {
+        while(index++ < position){
+            prev = current;
+            current = current.next;
+        }
+
+        prev.next = current.next;
+        current.next.prev = prev;
+    }
+
+    this.length--;
+    return current.data;
 };
 ```
