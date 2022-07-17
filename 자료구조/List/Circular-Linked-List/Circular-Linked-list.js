@@ -21,3 +21,65 @@ CircularLinkedList.prototype.size = function(){
 CircularLinkedList.prototype.isEmpty = function(){
     return this.length === 0;
 };
+
+// printNode() : 노드 출력
+CircularLinkedList.prototype.printNode =function(){
+    process.stdout.write("head -> ");
+    if(this.length != 0){
+        process.stdout.write(`${this.head.data} -> `);
+        for(let node = this.head.next; node != this.head; node = node.next){
+            process.stdout.write(`${node.data} -> `);
+        }
+    }
+    console.log("head");
+};
+
+// append() : 연결리스트 가장 끝에 노드 추가
+CircularLinkedList.prototype.append = function(value){
+    let node = new Node(value),
+        current = this.head;
+
+    if(this.head === null){
+        this.head = node;
+    } else {
+        while(current.next != this.head){
+            current = current.next;
+        }
+        current.next = node;
+    }
+    node.next = this.head;
+    this.length++;
+};
+
+// insert() : 특정위치에 노드 추가
+CircularLinkedList.prototype.insert = function(value, position = 0){
+    if(position < 0 || position > this.length) return false;
+
+    let node = new Node(value),
+        current = this.head,
+        index = 0,
+        prev;
+    if(position === 0){
+        node.next = current;
+        if(this.isEmpty()){
+            current = node;
+        } else {
+            while(current.next != this.head){
+                current = current.next;
+            }
+        }
+        this.head = node;
+        current.next = this.head;
+    } else {
+        while(index++ < position){
+            prev = current;
+            current = current.next;
+        }
+        node.next = current;
+        prev.next = node;
+
+        if(node.next === null) node.next = this.head;
+    }
+    this.length++;
+    return true;
+};
