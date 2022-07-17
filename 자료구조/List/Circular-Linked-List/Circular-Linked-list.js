@@ -83,3 +83,72 @@ CircularLinkedList.prototype.insert = function(value, position = 0){
     this.length++;
     return true;
 };
+
+// remove() : 특정노드를 삭제
+CircularLinkedList.prototype.remove = function(value){
+    let current = this.head,
+        prev = current,
+        data;
+    while(current.data != value && current.next != this.head){
+        prev = current;
+        current = current.next;
+    }
+    if(current.data != value){
+        return null;
+    }
+    data = current.data;
+    if(current === this.head){
+        while(current.next != this.head){
+            current = current.next;
+        }
+        this.head = this.head.next;
+        current.next = this.head;
+    } else {
+        prev.next = current.next;
+    }
+    this.length--;
+    return data;
+};
+
+// removeAt() : 특정위치의 노드 삭제
+CircularLinkedList.prototype.removeAt = function(position = 0){
+    if(position < 0 || position > this.length) return null;
+
+    let current = this.head,
+        index = 0, 
+        prev,
+        data;
+
+    if(position === 0){
+        data = current.data;
+        while(current.next != this.head){
+            current = current.next;
+        }
+        this.head = this.head.next;
+        current.next = this.head;
+    } else {
+        while(index++ < position){
+            prev = current;
+            current = current.next;
+        }
+        data = current.data;
+        prev.next = current.next;
+    }
+    this.length--;
+    return data;
+};
+
+// indexOf() : 특정노드의 위치 반환
+CircularLinkedList.prototype.indexOf = function(value){
+    let current = this.head,
+        index = 0;
+    do{
+        if(current.data === value){
+            return index;
+        }
+        index++;
+        current = current.next;
+    } while(current != this.head);
+
+    return -1;
+};
