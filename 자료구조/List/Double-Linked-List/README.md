@@ -274,3 +274,21 @@ doubleLinkedList.printNode();
 doubleLinkedList.removeAt(1);
 ```
 ---
+## indexOf
+특정값의 노드위치를 반환
+- 인덱스만 반환 해 주는것이기 때문에 연결리스트와 같음
+```javascript
+DoubleLinkedList.prototype.indexOf = function(value){
+    let current = this.head,
+    index = 0;
+
+    while(current != null){
+        if(current.data === value) return index;
+
+        index++;
+        current = current.next;
+    }
+
+    return -1;
+};
+```
