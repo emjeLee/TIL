@@ -122,3 +122,90 @@ CircularLinkedList.prototype.insert = function(value, position = 0){
 };
 ```
 ---
+## remove
+특정값의 노드 삭제
+- 끝 부분 노드처리만 해 주면 된다.
+- 삭제할 노드(현재 current)를 업데이트 해줄 data 변수선언
+- **첫번째 요소가 삭제** 될 때 
+    - 첫번째 요소가 변하면 맨끝의 요소의 다음값도 변경 되어야 한다. 
+    - 마지막 노드(current)를 찾아 현재 head를 head.next값으로 업데이트, 찾은 마지막 노드는 업데이트 된 head값과 연결 해 준다.
+```javascript
+CircularLinkedList.prototype.remove = function(value){
+    let current = this.head,
+        prev = current,
+        data;
+    while(current.data != value && current.next != this.head){
+        prev = current;
+        current = current.next;
+    }
+    if(current.data != value){
+        return null;
+    }
+    data = current.data;
+    if(current === this.head){
+        while(current.next != this.head){
+            current = current.next;
+        }
+        this.head = this.head.next;
+        current.next = this.head;
+    } else {
+        prev.next = current.next;
+    }
+    this.length--;
+    return data;
+};
+```
+## removeAt
+특정 위치의 노드 삭제
+- remove와 같이 끝 부분 노드처리만 해 주면 된다.
+- **position이 0** 일 때
+    - 첫번째 요소가 변하면 맨끝의 요소의 다음값도 변경 되어야 한다. 
+    - head에 대한 데이터를 data변수에 할당 해 준다. (삭제 할 값)
+    - 마지막 노드(current)를 찾아 현재 head를 head.next값으로 업데이트 (원래 head의 참조값 삭제 됨)
+    - 유일하게 남은 참조값인 current.next에  this.head를 업데이트 해줌으로써 기존 0번째 노드의 데이터를 1번값 으로 업데이트된 데이터로 설정해준다.
+```javascript
+CircularLinkedList.prototype.removeAt = function(position = 0){
+    if(position < 0 || position > this.length) return null;
+
+    let current = this.head,
+        index = 0, 
+        prev,
+        data;
+
+    if(position === 0){
+        data = current.data;
+        while(current.next != this.head){
+            current = current.next;
+        }
+        this.head = this.head.next;
+        current.next = this.head;
+    } else {
+        while(index++ < position){
+            prev = current;
+            current = current.next;
+        }
+        data = current.data;
+        prev.next = current.next;
+    }
+    this.length--;
+    return data;
+};
+```
+## indexOf
+특정값의 노드위치를 반환
+- 기저조건이 current값이 head값과 같을 때 이다 이때 연결리스트와같이 while문을 쓰게 되면 시작을 head에서 하기 때문에 false가 되어 버린다. 그러므로 어떠한 조건없이 무조건 한번은 실행하는 do while을 통해 current값을 다음 노드로 한 번 이동시켜준다.
+```javascript
+CircularLinkedList.prototype.indexOf = function(value){
+    let current = this.head,
+        index = 0;
+    do{
+        if(current.data === value){
+            return index;
+        }
+        index++;
+        current = current.next;
+    } while(current != this.head);
+
+    return -1;
+};
+```
