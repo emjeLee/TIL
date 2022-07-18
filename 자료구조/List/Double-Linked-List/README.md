@@ -10,9 +10,9 @@
 - 노드 추가
     - [DoubleLinkedList.append()](#append), [DoubleLinkedList.insert()](#insert)
 - 노드 삭제
-    -  DoubleLinkedList.remove(), DoubleLinkedList.removeAt()
+    -  [DoubleLinkedList.remove()](#remove), [DoubleLinkedList.removeAt()](#removeat)
 - 데이터 위치 확인
-    - DoubleLinkedList.indexOf()
+    - [DoubleLinkedList.indexOf()](#indexof)
 
 ## 객체 생성
 - 양쪽으로 연결 해 주기 위한 prev가 추가 됨
