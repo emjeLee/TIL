@@ -74,12 +74,13 @@ HashTable.prototype.getBuffer = function(){
         }
     }
     return array;
-}
+};
 
-let h = new HashTable();
-
-h.put("aa", 123)
-h.put("aab", 1223)
-h.put("vb", 1223)
-
-console.log(h.getBuffer());
+// print() : 데이터 셋 출력
+HashTable.prototype.print = function(){
+    for(let i=0; i < this.length; i++){
+        if(this.table[i]){
+            console.log(`${i} -> ${this.table[i].key}: ${this.table[i].value}`)
+        }
+    }
+};
