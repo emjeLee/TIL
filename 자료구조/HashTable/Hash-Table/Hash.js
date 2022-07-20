@@ -78,7 +78,7 @@ HashTable.prototype.getBuffer = function(){
 
 // print() : 데이터 셋 출력
 HashTable.prototype.print = function(){
-    for(let i=0; i < this.length; i++){
+    for(let i=0; i < this.table.length; i++){
         if(this.table[i]){
             console.log(`${i} -> ${this.table[i].key}: ${this.table[i].value}`)
         }
