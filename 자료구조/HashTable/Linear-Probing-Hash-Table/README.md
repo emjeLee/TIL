@@ -69,3 +69,30 @@ LinearHashTable.prototype.print = function(){
     }
 };
 ```
+## put
+데이터 추가
+-  해당인덱스에 값이 존재 하는지 확인
+    - 비어있다면 그 자리에 값을 넣는다
+    - 비어있지 않다면 다음 인덱스를 확인 후 비어 있으면 값을 넣는다 (시작 인덱스로 다시 돌아올때까지 반복)
+- startIndex에 처음 인덱스 값을 저장해준다.
+- 처음 index값과 startIndex의 값이 같기 때문에 바로 종료 되지 않도록 do while을 사용해준다.
+```javascript
+LinearHashTable.prototype.put = function(key, value){
+    let index = this.hashCode(key);
+    let startIndex = index;
+    console.log(`key: ${key} -> index: ${index}`);
+
+    do{
+        //비어 있을 때
+        if(this.table[index] === undefined){
+            this.table[index] = new Element(key, value);
+            this.length++;
+            return true;
+        }
+        // 비어있지 않을 때
+        index = (index + 1) % HASH_SIZE;
+    }   
+    while (index !== startIndex);
+    return false;
+};
+```
