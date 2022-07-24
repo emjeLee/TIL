@@ -34,3 +34,23 @@ Deque.prototype.pushBack = function(element){
 Deque.prototype.popBack = function(){
     return this.array.pop();
 };
+
+// front() : 첫번째 데이터 반환
+Deque.prototype.front = function(){
+    return this.array.length === 0 ? undefined : this.array[0]
+};
+
+// back() : 마지막 데이터 반환
+Deque.prototype.back = function(){
+    return this.array.length === 0 ? undefined : this.array[this.array.length - 1];
+};
+
+// size() : 큐 내 데이터 개수 확인
+Deque.prototype.size = function(){
+    return this.array.length;
+};
+
+// clear() : 큐 초기화
+Deque.prototype.clear = function(){
+    this.array = [];
+};
