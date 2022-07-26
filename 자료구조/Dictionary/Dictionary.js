@@ -43,3 +43,28 @@ Dictionary.prototype.remove = function(key){
     }
     return false;
 };
+
+// keys() : 모든 key값을 배열 형태로 반환
+Dictionary.prototype.keys = function(){
+    return Object.keys(this.items);
+};
+
+// values() : 모든 value값을 배열 형태로 반환
+Dictionary.prototype.values = function(){
+    return Object.values(this.items);
+};
+
+// each() : 모든 개체 요소에 대해 callback함수 수행 (:= foreach)
+Dictionary.prototype.each = function(fn){
+    for(let k in this.items){
+        if(this.has(k)){
+            fn(k, this.items[k]);
+        }
+    }
+};
+
+// printDictionary() : 개체 출력 callback
+function printDictionary(key, value){
+    console.log(`key: ${key}`);
+    console.log(`value: ${value}`);
+};
