@@ -78,3 +78,42 @@ Dictionary.prototype.remove = function(key){
 };
 ```
 ---
+## keys
+모든 key값을 배열 형태로 반환
+```javascript
+Dictionary.prototype.keys = function(){
+    return Object.keys(this.items);
+};
+```
+---
+## values
+모든 value값을 배열 형태로 반환
+```javascript
+Dictionary.prototype.values = function(){
+    return Object.values(this.items);
+    // let value = [];
+    // for (let k in this.items){
+    //   values.push(this.items[k]); 
+    //};
+};
+```
+---
+## each
+모든 객체 요소에 대해 callback함수 수행 (:= foreach)
+- callback함수로 key값을 받아서 printDictionary를 통해 key, value를 출력
+```javascript
+Dictionary.prototype.each = function(fn){
+    for(let k in this.items){
+        fn(k, this.items[k]);
+    }
+};
+```
+---
+## printDictionary
+객체 출력 callback
+```javascript
+function printDictionary(key, value){
+    console.log(`key: ${key}`);
+    console.log(`value: ${value}`);
+};
+```
