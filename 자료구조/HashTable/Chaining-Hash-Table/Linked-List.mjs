@@ -43,6 +43,8 @@ LinkedList.prototype.append = function(value){
         }
         current.next = node;
     }
+
+    this.length++;
 };
 
 // insert() : position 위치에 노드 추가
