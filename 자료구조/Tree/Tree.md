@@ -25,3 +25,54 @@
 - 노드 차수(degree) : 노드가 지닌 가지의 수
 - 트리 차수(tree degree) : 트리의 최대 차수
 - 트리 높이(height) : 루트 노드의 가장 깊숙이 있는 노드의 깊이
+# 트리 순회
+트리 구조에서 각각의 노들르 정확히 한 번씩 체계적인 방법으로 방문하는 과정
+- N(Node) : 해당 노드를 방문
+- L(Left) : 왼쪽 서브 트리로 이동
+- R(Right) : 오른쪽 서브 트리로 이동
+---
+## 순회방식
+### 전위순회(Pre-order) : N - L - R
+1. 노드를 방문한다.
+2. 왼쪽 서브트리를 전위 순회한다. 
+3. 오른쪽 서브트리를 전위 순회한다.
+```javascript
+preorder(node)
+    print node.value
+    if node.left !== null then preorder(node.left)
+    if node.right !== null then preorder(node.right)
+```
+### 중위순회(In-order) : L - N - R
+1. 왼쪽 서브트리를 중위 순회한다.
+2. 현재 노드를 방문한다.
+3. 오른쪽 서브트리를 중위 순회한다.
+```javascript
+preorder(node)
+    if node.left !== null then preorder(node.left)
+    print node.value
+    if node.right !== null then preorder(node.right)
+```
+### 후위순회(Post-order) : L - R - N
+1. 왼쪽 서브트리를 후외 순회한다.
+2. 오른쪽 서브트리를 후위 순회한다.
+3. 현재 노드를 방문한다.
+```javascript
+preorder(node)
+    if node.left !== null then preorder(node.left)
+    if node.right !== null then preorder(node.right)
+    print node.value
+```
+### 층별순회(Level=order) : 낮은 Level부터 순차적으로 순회(=bfs)
+1. root노드 방문
+2. Level 증가
+3. 왼쪽에서 오른쪽 순으로 방문
+```javascript
+levelorder(root)
+    q.enqueue(root)
+    while not q.empty do
+    node := q.dequeue()
+    print node.value
+    if node.left !== null then preorder(node.left)
+    if node.right !== null then preorder(node.right)
+```
+---
