@@ -26,3 +26,17 @@ BinaryTree.prototype._insertNode = function(node, value){
 BinaryTree.prototype.insert = function(value){
     this.root = this._insertNode(this.root, value);
 };
+
+// _preOrderTraverseNode() : 재귀로 트리를 전위 순회(내부 사용)
+BinaryTree.prototype._preOrderTraverseNode = function(node, callback){
+    if(node === null) return;
+
+    callback(node);
+    this._preOrderTraverseNode(node.left, callback);
+    this._preOrderTraverseNode(node.right, callback);
+}
+
+// preOrderTraverseNode() : 전위 순회하며 노드 출력
+BinaryTree.prototype.preOrderTraverse = function(callback){
+    this._preOrderTraverseNode(this.root, callback);
+};
