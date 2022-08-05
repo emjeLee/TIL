@@ -16,7 +16,7 @@ BinaryTree.prototype._insertNode = function(node, value){
         node = new Node(value);
     } else if(value < node.value){
         node.left = this._insertNode(node.left, value);
-    } else if(value >= node.value){
+    } else if(value > node.value){
         node.right = this._insertNode(node.right, value);
     }
     return node;
