@@ -69,3 +69,30 @@ BinaryTree.prototype.postOrderTraverse = function(callback){
     this._postOrderTraverseNode(this.root, callback);
 };
 
+// Queue 객체 추가
+function Queue(array){
+    this.array = array ? array : [];
+};
+
+Queue.prototype.isEmpty = function(){
+    return this.array.length === 0;
+};
+Queue.prototype.enqueue = function(element){
+    return this.array.push(element);
+};
+Queue.prototype.dequeue = function(){
+    return this.array.shift();
+};
+
+// levelOrderTraverse() : 충별 순회하며 노드 출력
+BinaryTree.prototype.levelOrderTraverse = function(callback){
+    let q = new Queue();
+    let node;
+    q.enqueue(this.root);
+    while(!q.isEmpty()){
+        node = q.dequeue();
+        callback(node);
+        if (node.left !== null) q.enqueue(node.left);
+        if (node.right !== null) q.enqueue(node.right);
+    }
+};
