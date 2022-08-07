@@ -40,3 +40,32 @@ BinaryTree.prototype._preOrderTraverseNode = function(node, callback){
 BinaryTree.prototype.preOrderTraverse = function(callback){
     this._preOrderTraverseNode(this.root, callback);
 };
+
+// _preOrderTraverseNode() : 재귀로 트리를 중위 순회(내부 사용)
+BinaryTree.prototype._inOrderTraverseNode = function(node, callback){
+    if(node === null) return;
+
+    this._inOrderTraverseNode(node.left, callback);
+    callback(node);
+    this._inOrderTraverseNode(node.right, callback);
+}
+
+// preOrderTraverseNode() : 중위 순회하며 노드 출력
+BinaryTree.prototype.inOrderTraverse = function(callback){
+    this._inOrderTraverseNode(this.root, callback);
+};
+
+// _preOrderTraverseNode() : 재귀로 트리를 후위 순회(내부 사용)
+BinaryTree.prototype._postOrderTraverseNode = function(node, callback){
+    if(node === null) return;
+
+    this._postOrderTraverseNode(node.left, callback);
+    this._postOrderTraverseNode(node.right, callback);
+    callback(node);
+}
+
+// postOrderTraverseNode() : 후위 순회하며 노드 출력
+BinaryTree.prototype.postOrderTraverse = function(callback){
+    this._postOrderTraverseNode(this.root, callback);
+};
+
