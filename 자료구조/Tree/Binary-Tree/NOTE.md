@@ -83,3 +83,58 @@ tree.insert("B");
 ```
 재귀로 인한 반복이 이루어진다.
 ---
+
+# 전위 순회
+
+### preOrderTraverseNode() 
+전위 순회하며 노드 출력
+```javascript
+BinaryTree.prototype.preOrderTraverse = function(callback){
+    this._preOrderTraverseNode(this.root, callback);
+};
+```
+### _preOrderTraverseNode()
+재귀로 트리를 전위 순회(내부 사용)
+```javascript
+BinaryTree.prototype._preOrderTraverseNode = function(node, callback){
+    if(node === null) return;
+
+    callback(node);
+    this._preOrderTraverseNode(node.left, callback);
+    this._preOrderTraverseNode(node.right, callback);
+};
+```
+# TEST
+```javascript
+let tree = new BinaryTree();
+
+tree.insert('F'); // root
+tree.insert('B'); // F.left
+tree.insert('A'); // B.left
+tree.insert('D'); // B.right
+
+// 출력하기 위한 코드
+function printNode(node){
+    process.stdout.write(`${node.value} -> `);
+};
+
+tree.preOrderTraverse(printNode);
+console.log("end");
+// F -> B -> A -> D -> end
+```
+
+```tree.preOrderTraverse(printNode)``` 를 통해 printNode는 preOrderTraverse의 매개변수 callback이 되고, this.root값을 받아 _preOrderTraverse가 실행 된다.  
+node = 'F' , callback = printNode(node)가 됨.
+1. ```callback(node)```를 통해 'F'를 먼저 출력 해 준다. 
+2. ```this._preOrderTraverseNode(node.left, callback)``` 가 실행되어
+    - node = 'B' , callback 상태
+3. B 출력 ```this._preOrderTraverseNode(node.left, callback)``` 실행
+    - node = 'A' , callback 상태
+4. A 출력 ```this._preOrderTraverseNode(node.left, callback)``` 실행
+    - node = null, callback 상태
+    - 기저조건에 걸려 바로 return
+    - node = A / right값이 없으므로 위와 동일
+5. A를 빠져나와(B의 left 순회 끝) B의 right를 탐색 
+6. 반복한다.
+
+전위, 중위, 후위가 대체적으로 같음 node를 출력하는 순서에 따라 다르다.
