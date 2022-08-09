@@ -73,3 +73,20 @@ BinarySearchTree.prototype.max = function(node){
     return this._maxNode(this.root);
 };
 
+//_searchNode() : 재귀로 트리를 순회하며 값을 만족하는 노드 탐색
+BinarySearchTree.prototype._searchNode = function(node, value){
+    if(node === null) return false;
+
+    if(node.value === value){
+        return true;
+    } else if (node.value > value){
+        return this._searchNode(node.left, value);
+    } else if (node.value < value){
+        return this._searchNode(node.right, value);
+    }
+};
+
+// search() : value노드 탐색
+BinarySearchTree.prototype.search = function(value){
+    return this._searchNode(this.root, value);
+};
