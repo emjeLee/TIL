@@ -138,3 +138,70 @@ node = 'F' , callback = printNode(node)가 됨.
 6. 반복한다.
 
 전위, 중위, 후위가 대체적으로 같음 node를 출력하는 순서에 따라 다르다.
+
+---
+
+# 층별순회
+Queue를 사용해 node를 층별 순회하여 넣어주고 dequeue를 통해 출력.
+```javascript
+// Queue 객체 추가
+function Queue(array){
+    this.array = array ? array : [];
+};
+
+Queue.prototype.isEmpty = function(){
+    return this.array.length === 0;
+};
+Queue.prototype.enqueue = function(element){
+    return this.array.push(element);
+};
+Queue.prototype.dequeue = function(){
+    return this.array.shift();
+};
+```
+
+### levelOrderTraverse() 
+충별 순회하며 노드 출력
+- q가 빈 배열이 될 때까지 반복
+```javascript
+BinaryTree.prototype.levelOrderTraverse = function(callback){
+    let q = new Queue();
+    let node; // node가 저장 될 임시변수
+    q.enqueue(this.root);
+    while(!q.isEmpty()){
+        node = q.dequeue();
+        callback(node);
+        if (node.left !== null) q.enqueue(node.left);
+        if (node.right !== null) q.enqueue(node.right);
+    }
+};
+```
+
+# TEST
+```javascript
+let tree = new BinaryTree();
+
+tree.insert('F'); // root
+tree.insert('B'); // F.left
+tree.insert('A'); // B.left
+tree.insert('D'); // B.right
+
+// 출력하기 위한 코드
+function printNode(node){
+    process.stdout.write(`${node.value} -> `);
+};
+
+tree.levelOrderTraverse(printNode);
+console.log("end");
+// F -> B -> A -> D -? end
+```
+1. ```q.enqueue(this.root)``` 를 통해 q에 "F"를 넣어주고, q의 값이 들어있으니 while문 실행, dequeue를 통해 node에 "F"를 할당 해 준다.  
+**현재** q = [], node = F
+2. node의 값 출력
+3. ```if (node.left !== null) q.enqueue(node.left);```
+    - node.left 의 값은 B 값이 있으므로 q에 넣어준다
+4. ```if (node.right !== null) q.enqueue(node.right);```
+    - 값이 없으므로 넘어 감.
+**현재** q = ["B"], node = F
+5. q에 값이 있으니 while문 처음으로 돌아와 node가 "B"로 업데이트 된다.
+6. 이것을 반복하면 마지막 층까지 탐색이 가능하다. (q배열에 차례대로 왼쪽, 오른쪽노드의 왼쪽, 오른쪽 자식노드들이 있다면 왼쪽 자식노드부터 하나씩 들어감)
