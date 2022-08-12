@@ -14,3 +14,33 @@ Graph.prototype.addVertex = function(v){
 Graph.prototype.addEdge = function(v1, v2){
     this.edge[v1].push(v2);
 };
+
+// removeEdge() : 간선 삭제
+Graph.prototype.removeEdge = function(v1, v2){
+    if(this.edge[v1]){
+        let idx = this.edge[v1].indexOf(v2);
+        if(idx !== -1){
+            this.edge[v1].splice(idx,1);
+        }
+        if(this.edge[v1].length === 0){
+            delete this.edge[v1];
+        }
+    }
+};
+
+// removeVertex() : 정점 삭제
+Graph.prototype.removeVertex = function(v){
+    if(this.edge[v] === undefined) return;
+    let length = this.edge[v].length;
+    let connectedVertex = [...this.edge[v]];
+    for(let i = 0; i<length; i++){
+        this.removeEdge(v, connectedVertex[i]);
+    }
+};
+
+let graph = new Graph();
+let vertices = ["A", "B", "C", "D", "E"]
+
+for(let i=0; i<vertices.length; i++){
+    graph.addVertex(vertices[i]);
+};
