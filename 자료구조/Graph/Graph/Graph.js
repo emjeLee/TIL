@@ -51,7 +51,7 @@ Graph.prototype.sizeEdge = function(vertex){
 // print() : 현재 Graph 연결 상태 출력
 Graph.prototype.print = function(){
     for(let vertex in this.edge){
-        let neighbors = this.edge[vertes];
+        let neighbors = this.edge[vertex];
         if(neighbors.length === 0) continue;
         process.stdout.write(`${vertex} -> `);
         for(let j=0; j<neighbors.length; j++){
