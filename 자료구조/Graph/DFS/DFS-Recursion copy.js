@@ -5,7 +5,7 @@ function Graph(){
 
 Graph.prototype.addVertex = function(v){
     this.edge[v] = [];
-    this.visited = false;
+    this.visited[v] = false;
 };
 
 Graph.prototype.addEdge = function(v1, v2){
@@ -31,8 +31,9 @@ Graph.prototype.dfs = function(startVertex){
 
 // _dfsRecursiveVisit() : 재귀를 이용한 DFS탐색
 Graph.prototype._dfsRecursiveVisit = function(vertex){
-    if(this.visited[vertex]) return;
-
+    if(this.visited[vertex]){
+        return;
+    }
     this.visited[vertex] = true;
     console.log(`visit "${vertex}"`);
 
