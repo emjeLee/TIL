@@ -5,6 +5,7 @@ function Graph(){
 
 Graph.prototype.addVertex = function(v){
     this.edge[v] = [];
+    this.visited = false;
 };
 
 Graph.prototype.addEdge = function(v1, v2){

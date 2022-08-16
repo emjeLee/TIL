@@ -7,6 +7,7 @@ function Graph(){
 
 Graph.prototype.addVertex = function(v){
     this.edge[v] = [];
+    this.visited[v] = false;
 };
 
 Graph.prototype.addEdge = function(v1, v2){
@@ -37,8 +38,9 @@ Graph.prototype._dfsLoopVisit = function(vertex){
 
     while(!stack.isEmpty()){
         let vertex = stack.pop();
-        if(this.visited[vertex]) continue;
-
+        if(this.visited[vertex]) {
+            continue;
+        }
         this.visited[vertex] = true;
         console.log(`visit "${vertex}"`)
 
