@@ -69,7 +69,7 @@ Graph.prototype._bfsShortestPath = function(vertex){
         let vertex = queue.dequeue();
 
         this.visited[vertex] = true;
-        console.log(`visit "${vertex}`);
+        console.log(`visit "${vertex}"`);
 
         let neighbors = this.edge[vertex];
         for(let i=0; i<neighbors.length; i++){
