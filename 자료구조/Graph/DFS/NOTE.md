@@ -38,7 +38,8 @@ Graph.prototype.dfs = function(startVertex){
 재귀를 이용한 탐색
 - 어떠한 정점 값을 받아 그 정점값과 인접되어 있는 노드들을 neighbors에 할당 시킨다.
 - neighbors의 길이 만큼 반복문을 돌면서 재귀를 통해 그 값의 인접되어 있는 값을 또 찾는다.
-- neighbors에 값이 없다면 (연결되어 있는 값이 없다면) 반복문을 수행하지 않고 바로 return할 수 있게 코드를 추가 해 보았다.
+- ~~neighbors에 값이 없다면 (연결되어 있는 값이 없다면) 반복문을 수행하지 않고 바로 return할 수 있게 코드를 추가 해 보았다.~~ (결국 length=0 이기 때문에 반복문을 실행하지 않는다.)
+
 - 방문 한 vertex는 visited를 true로 업데이트 해 준다.
 ```javascript
 Graph.prototype._dfsRecursiveVisit = function(vertex){
@@ -49,10 +50,6 @@ Graph.prototype._dfsRecursiveVisit = function(vertex){
     console.log(`visit ${vertex}`);
 
     let neighbors = this.edge[vertex];
-    // 추가
-    if (neighbors === 0){
-        return;
-    }
     for(let i=0; i<neighbors.length; i++){
         this._dfsRecursiveVisit(neighbors[i]);
     }
