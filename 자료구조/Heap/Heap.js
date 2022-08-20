@@ -37,8 +37,8 @@ Heap.prototype.leftChild = function(index){
 
 // rightChild() : 오른쪽 자식 노드의 요소 값 반환
 Heap.prototype.rightChild = function(index){
-    return this.items[this.rightChildIndex[index]];
-};
+    return this.items[this.rightChildIndex(index)];
+}
 
 // peek() : 현재 정렬된 최소/최대 요소값 반환
 Heap.prototype.peek = function(){
@@ -80,10 +80,14 @@ Heap.prototype.bubbleDown = function(){
     let index = 0;
     while(this.leftChild(index) && (this.leftChild(index) < this.items[index] || this.rightChild(index) < this.items[index])){
         let childIndex = this.leftChildIndex(index);
+        console.log('1', childIndex)
+        console.log('left', this.leftChild(index))
+        console.log('right', this.rightChild(index))
+        // if문이 실행되지 않는 오류발생. 확인해 보니 rightChild메서드에서 오타가 났다 () 대신 [] 로 오타가 났었음.
         if(this.rightChild(index) && this.rightChild(index) < this.items[childIndex]){
             childIndex = this.rightChildIndex(index);
+            console.log('2', childIndex)
         }
-
         this.swap(childIndex, index);
         index = childIndex;
     }
