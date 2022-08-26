@@ -50,3 +50,108 @@ res
     .catch((err)=>{
         console.log("작업실패: ", err);
     });
+---
+# Promise로 콜백지옥 해결 하기
+## 콜백지옥 예시
+```javascript
+function taskA(a, b, cb){
+    setTimeout(() => {
+        const res = a + b;
+        cb(res);
+    }, 3000);
+};
+
+function taskB(a, cb){
+    setTimeout(() => {
+        const res = a * 2;
+        cb(res);
+    }, 1000);
+};
+
+function taskC(a, cb){
+    setTimeout(() => {
+        const res = a * -1;
+        cb(res);
+    }, 2000);
+};
+
+taskA(3, 4, (a_res) => {
+    console.log("task A: ", a_ res);
+    taskB(a_res, (b_res) => {
+        console.log("task B: ", b_res);
+        taskC(b_res, (c_res) => {
+            console.log("task C: ", c_res);
+        })
+    })
+});
+```
+## Promise를 사용한 예시
+```javascript
+function taskA(a, b){
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+        const res = a + b;
+        resolve(res);
+    }, 3000);
+    })  
+};
+
+function taskB(a){
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+        const res = a * 2;
+        resolve(res);
+    }, 1000);
+    })
+};
+
+function taskC(a){
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+        const res = a * -1;
+        resolve(res);
+    }, 2000);
+    })
+};
+
+taskA(1,2).then((a_res) => {
+    console.log("A RESULT: ", a_res);
+    return taskB(a_res);
+}).then((b_res) => {
+    console.log("B RESULT: ", b_res);
+    return taskC(b_res);
+}).then((c_res) => {
+    console.log("C RESULT: ", c_res);
+});
+```
+- 이 코드의 반환값은 ```taskB(a_rea)```이다.  
+- ```taskA```에 1,2를 전달하면 'Promise'객체를 전달 받고, 'then'을 사용하여 ```taskB(a_res)```호출 한 것을 전달 한 것.  
+- 이 코드는 taskB를 반환받은 Promise이다. 따라서 이 뒤로 then을 사용하여 처리 할 수 있는 것이다.  
+    
+        taskA(1,2).then((a_res) => {
+        console.log("A RESULT: ", a_res);
+        return taskB(a_res);
+        })
+promise 객체를 이용하면 비동기처리를 호출하는 코드와 결과를 처리하는코드를 분리 해 줄 수 있다.
+```javascript
+//  bPromiseResult는 taskB를 반환한다.
+const bPromiseResult = taskA(1,2).then((a_res) => {
+    console.log("A RESULT: ", a_res);
+    return taskB(a_res);
+});
+
+console.log(123);
+
+bPromiseResult.then((b_res) => {
+    console.log("B RESULT: ", b_res);
+    return taskC(b_res);
+}).then((c_res) => {
+    console.log("C RESULT: ", c_res);
+});
+
+// result
+// 123
+// 3
+// 6
+// -6
+```
