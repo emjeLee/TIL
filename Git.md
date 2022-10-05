@@ -22,3 +22,6 @@
    - unstaged / 디렉터리 보존  
 - git reset --hard HEAD^
    - unstaged / 디렉터리 삭제
+
+## git commit취소 후 강제 push
+- git push --force
