@@ -36,11 +36,13 @@ console.log(age); //4
 -   변수를 선언할 수 있다.
 -   선언된 변수는 메모리 어딘가에 할당된 박스를 가르킨다
     -   이것을 통해 값을 계속 바꿀 수 있음
+    - 읽고, 쓰기가 가능하기 때문
 -   ES6에서부터 추가되었다.
 
 ## const : Immutable
 
 -   한번 할당히면 재 할당이 불가능하다
+    - 읽기만 가능하다.
 -   값을 할당한 후 값이 변경되지 않는 데이터타입을 지향하라.
     -   보안상의 이유.
     -   thread들이 동시에 값을 변경하는것을 상황을 줄일 수 있다.
@@ -49,7 +51,10 @@ console.log(age); //4
 ---
 
 # Variable types
-
+- Immutable data types
+    - 데이터자체를 변경할 수 없음. 
+- Mutable data types
+    - JS에서는 기본적으로 모든 object는 변경이 가능하다.
 -   primitive, single item
 -   object, box container
 -   function, first-class function
