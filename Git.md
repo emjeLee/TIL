@@ -25,3 +25,28 @@
 
 ## git commit취소 후 강제 push
 - git push --force
+
+---
+# .gitignore 파일 생성하기
+- 특정 파일이나 폴더를 업로드에서 제외해야할 때 사용
+### 파일 생성하기
+터미널에서 생성을 원하는 폴더 최상위 위치로 이동  
+
+    $ cd [경로]
+.gitignore 파일 생성 & 편집
+
+    $ vim .gitignore
+
+편집기에서 `a`를 누르면 작성 시작
+  
+    폴더 경로 입력
+    #for mac
+    */ .DS_Store
+    .DS_Store
+`esc` : 명력 입력 모드로 전환  
+`:wq` : 입력 내용 저장, 파일생성 완료
+
+### 커밋하기
+    $ git add .
+    $ git commit -m [커밋메세지]
+    $ git push
